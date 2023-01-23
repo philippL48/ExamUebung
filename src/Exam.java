@@ -1,7 +1,8 @@
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
-//import java.util.Collections;
 public class Exam {
     private String name;
     private int year;
@@ -22,6 +23,14 @@ public class Exam {
         public int getPoints() {
             return points;
         }
+
+        @Override
+        public String toString() {
+            return "Question{" +
+                    "text='" + text + '\'' +
+                    ", points=" + points +
+                    '}';
+        }
     }
 
     public Exam(String name, int year) {
@@ -34,7 +43,7 @@ public class Exam {
         questions.add(new Question(text, points));
     }
 
-    public ArrayList getQuestions() {
+    public List<Question> getQuestions() {
         return questions;
     }
 
@@ -59,11 +68,24 @@ public class Exam {
     }
 
     public void orderQuestionsByLength() {
-        Collections.sort(questions);
+        Collections.sort(questions, new Comparator<Question>() {
+            @Override
+            public int compare(Question o1, Question o2) {
+                return o1.getText().length() - o2.getText().length();
+            }
+        });
     }
 
     public void orderQuestionByPoints() {
-
+        Collections.sort(questions, (q1, q2) -> q1.getPoints() - q2.getPoints()); //??
     }
 
+    @Override
+    public String toString() {
+        return "Exam{" +
+                "name='" + name + '\'' +
+                ", year=" + year +
+                ", questions=" + questions +
+                '}';
+    }
 }
