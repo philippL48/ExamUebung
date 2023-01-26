@@ -1,3 +1,6 @@
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -87,5 +90,37 @@ public class Exam {
                 ", year=" + year +
                 ", questions=" + questions +
                 '}';
+    }
+
+    public void save() {
+        BufferedWriter writer = null;
+        try {
+            writer = new BufferedWriter(new FileWriter("config.txt"));
+            writer.write(name);
+            writer.newLine();
+            writer.write(Integer.toString(year));
+            writer.newLine();
+            writer.write(Integer.toString(questions.size() ));
+            writer.newLine();
+            for (int i = 0; i < questions.size(); i++ ) {
+                writer.write(questions.get(i).text);
+                writer.newLine();
+                writer.write(Integer.toString(questions.get(i).points));
+                writer.newLine();
+            }
+
+
+
+        } catch (IOException e) {
+            System.err.println("Beim Erstellen der Datei ist ein Fehler aufgetreten.");
+        } finally {
+            if (writer != null) {
+                try { writer.close(); } catch (Exception e) {e.printStackTrace();}
+            }
+        }
+    }
+
+    public boolean load() {
+        return true;
     }
 }
