@@ -1,6 +1,4 @@
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -95,7 +93,7 @@ public class Exam {
     public void save() {
         BufferedWriter writer = null;
         try {
-            writer = new BufferedWriter(new FileWriter("config.txt"));
+            writer = new BufferedWriter(new FileWriter("configTest.txt")); //
             writer.write(name);
             writer.newLine();
             writer.write(Integer.toString(year));
@@ -121,6 +119,32 @@ public class Exam {
     }
 
     public boolean load() {
+        questions.removeAll(questions);
+        BufferedReader bufferedReader;
+
+        try {
+            bufferedReader = new BufferedReader(new FileReader("config.txt"));
+            name = bufferedReader.readLine();
+            bufferedReader.readLine();
+            String questionString;
+            String pointString;
+            while (( questionString = bufferedReader.readLine()) != null) {
+                    //questionString = bufferedReader.readLine();
+                    pointString = bufferedReader.readLine();
+                    questions.add( new Question( questionString, Integer.parseInt(pointString) ) );
+            }
+
+        } catch (FileNotFoundException e) {
+            System.err.println("Datei konnte nicht gefunden werden.");
+            e.printStackTrace();
+            return false;
+        } catch (IOException e) {
+            System.err.println("Datei konnte nicht gelesen werden.");
+            e.printStackTrace();
+            return false;
+        }
+
+
         return true;
     }
 }
