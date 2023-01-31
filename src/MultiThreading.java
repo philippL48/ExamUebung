@@ -2,7 +2,7 @@ import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
 
 public class MultiThreading {
-    public static int counter;
+
 
     public static void main(String args[]) {
         try {
@@ -25,8 +25,6 @@ public class MultiThreading {
         }
     }
 
-    public synchronized static void increment() {
-        counter++;
-    }
+
 
 }

@@ -3,7 +3,8 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class CounterThread extends Thread {
 
-    String name;
+    public static String name;
+    public static int counter;
 
 
     public CounterThread(String name) {
@@ -13,16 +14,24 @@ public class CounterThread extends Thread {
 
 
             try {
-                while (MultiThreading.counter < 43) {
-                    System.out.println("Thread: " + name + " Counter:" + MultiThreading.counter);
-                    MultiThreading.increment();
-                    TimeUnit.SECONDS.sleep(ThreadLocalRandom.current().nextInt(1, 3 + 1));
+                while (counter < 42) {
+
+                    increment();
+                    Thread.sleep(1000, 3000);
+
                 }
 
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
+
+
+    public synchronized static void increment() {
+
+        counter++;
+        System.out.println("Thread: " + name + " Counter:" + counter);
+    }
 
 
 }

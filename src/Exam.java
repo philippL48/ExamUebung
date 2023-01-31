@@ -1,4 +1,6 @@
 import java.io.*;
+import java.io.IOException;
+import java.io.Reader;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -146,5 +148,48 @@ public class Exam {
 
 
         return true;
+    }
+
+    public boolean load() {
+        /*Reader reader = new Reader() {
+            @Override
+            public int read(char[] cbuf, int off, int len) throws IOException {
+                return 0;
+            }
+
+            @Override
+            public void close() throws IOException {
+
+            }
+        }
+
+        try {
+            BufferedReader rd = new BufferedReader(new FileReader("C://config.txt"));
+            name = rd.readLine();
+            year = Integer.parseInt(rd.readLine());
+            //int points = Integer.parseInt(rd.readLine());
+
+            String line = rd.readLine();
+            while (line != null) {
+
+            }
+
+
+
+        } catch (IOException e) {
+            System.err.println("Datei konnte nicht gelesen werden.");
+            e.printStackTrace();
+        }
+
+        }
+
+    }
+
+
+
+    public void save() {
+        try {
+            PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter("C://config.txt")));
+        }
     }
 }
